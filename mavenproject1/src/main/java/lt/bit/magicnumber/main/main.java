@@ -13,8 +13,10 @@ import java.util.Scanner;
 
 /**
  * unfinished program to get magic number from input it checks if multiplied
- * from 1 to 6 number still have magic number properties
- *
+ * number still have magic number properties
+ * other numbers would be longer than int so it's out of reach (we need long type)
+ * it can start with zeros, so we need to take into consideration and change program
+ * 
  * @author Karolis
  */
 public class main {

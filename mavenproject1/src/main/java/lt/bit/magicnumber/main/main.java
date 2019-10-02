@@ -36,35 +36,47 @@ public class main {
             List<Integer> mnl = toIntegerArray(mn);
             if (mnl != null) {
                 //isMagical - checks if number is magical
-                Boolean isMagical = false;
+                Boolean isMagical = true;
                 //magic number digit count is the same as times number have to be multiplied
                 //this loop checks all multiplications
                 for (int i = 1; i <= mnl.size(); i++) {
-                    List<Integer> multipliedList = toIntegerArray(mn * i);
-                    //checking if multiplied list have first original number digit
-                    List<Integer> indexes = getIndexes(multipliedList, mnl.get(0));
-                    if (!indexes.isEmpty()) {
-                        //array list of indexes, for all repeated 
-                        for (Integer index : indexes) {
-                            // two cycles to get from index to last and from first to index elements of array
-                            List<Integer> tempList = new ArrayList<>();
-                            for (int j = index; j < multipliedList.size(); j++) {
-                                tempList.add(multipliedList.get(j));
+                    if (isMagical == true) {
+                        List<Integer> multipliedList = toIntegerArray(mn * i);
+                        //checking if multiplied list have first original number digit
+                        List<Integer> indexes = getIndexes(multipliedList, mnl.get(0));
+                        if (!indexes.isEmpty()) {
+                            Boolean check = false;
+                            //array list of indexes, for all repeated 
+                            for (Integer index : indexes) {
+                                // two cycles to get from index to last and from first to index elements of array
+                                List<Integer> tempList = new ArrayList<>();
+                                for (int j = index; j < multipliedList.size(); j++) {
+                                    tempList.add(multipliedList.get(j));
+                                }
+                                for (int j = 0; j < index; j++) {
+                                    tempList.add(multipliedList.get(j));
+                                }
+                                if (mnl.equals(tempList)) {
+                                    check = true;
+                                    break;
+                                }
                             }
-                            for (int j = 0; j < index; j++) {
-                                tempList.add(multipliedList.get(j));
+                            if (check == false) {
+                                isMagical = false;
                             }
-                            if (mnl.equals(tempList)) {
-                                isMagical = true;
-                                break;
-                            }
+                        } else {
+                            //if there is no first input number digit in multiplied 
+                            //number it's not magical and we need to stop loop
+                            isMagical = false;
+                            break;
                         }
-
-                    } else {
-                        break;
                     }
                 }
-
+                if (isMagical == true){
+                    System.out.println("It's magic");
+                } else {
+                    System.out.println("no magic at all");
+                }
             }
         }
     }
